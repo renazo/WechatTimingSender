@@ -1,28 +1,32 @@
 #导入gui库
 import tkinter as tk
 from tkinter import messagebox
+import func as f
+from tkcalendar import DateEntry
+
+#方法转译
+def get_position():
+    f.gP()
+
+def submit_date():
+    date = date_entry.get()
+    f.submit(date)
 
 #gui
-window = tk.Tk()
-window.title('微信定点回复')
-tips = tk.Label(window, text=prompts).pack()
-gpb = tk.Button(window, text='获取基本位置', width=15, height=2, command = gP)
-#日期时间输入框(24小时制)
-#performT = tk.Label(window, text='请输入你需要执行的时间').place(x=10, y=50)
+root = tk.Tk()
+root.title("微信定点发送")
 
-l = tk.Label(window, text="请输入日期和时间 (格式: 年/月/日/时/分/秒): ")
-l.pack()
+prompt_label = tk.Label(root, text=f.prompts)
+prompt_label.pack()
 
-e = tk.Entry(window)
-e.pack()
+position_button = tk.Button(root, text="获取基本位置", command=get_position)
+position_button.pack()
 
-b = tk.Button(window, text="提交", command=submit)
-b.pack()
+date_entry = DateEntry(root)
+date_entry.pack()
 
+submit_button = tk.Button(root, text="执行", command=submit_date)
+submit_button.pack()
 
-
-
-
-gpb.pack()
-window.mainloop()
+root.mainloop()
 
