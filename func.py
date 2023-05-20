@@ -1,3 +1,10 @@
+#导入基本库
+import pyautogui
+import time
+from datetime import datetime
+import threading
+from pynput import mouse
+
 def validate_date(date_text):
     try:
         if date_text != '':
@@ -25,3 +32,39 @@ def schedule_execution(input_time):
 def submit():
     input_time = e.get()
     schedule_execution(input_time)
+
+prompts = '点击获取基本位置后输入你需要执行的时间 然后点击执行来准备执行操作'
+#文本框内容转换
+def PChange(pnum):
+    global prompts
+    if pnum == 100:
+        #初始
+        prompts = '点击获取基本位置后输入你需要执行的时间 然后点击执行来准备执行操作'
+        #获取输入框位置期间
+    elif pnum == 101:
+            prompts = '请点击你的鼠标左键到微信的输入框上'
+        #获取发送按钮位置期间
+    elif pnum == 102:
+            prompts = '请点击你的鼠标左键到微信的发送按钮上'
+    else:
+        prompts = '点击获取基本位置后输入你需要执行的时间 然后点击执行来准备执行操作'
+
+
+
+#获取基本鼠标位置
+sendPx = 0
+sendPy = 0
+inputPx = 0
+inputPy = 0
+def gP():
+    global sendPx, sendPy, inputPx, inputPy
+    #如果左键按下则获取鼠标位置
+    PChange(101)
+    if pyautogui.mouseDown():
+        inputPx, inputPy = pyautogui.position()
+    # 如果左键按下则获取鼠标位置
+    PChange(102)
+    if pyautogui.mouseDown():
+        sendPx, sendPy = pyautogui.position()
+    PChange(100)
+    print(inputPx, inputPy, sendPx, sendPy)
