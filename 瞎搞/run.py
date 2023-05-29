@@ -1,7 +1,6 @@
 #导入gui库
 import tkinter as tk
-from tkinter import messagebox
-import func as f
+from 瞎搞 import func as f
 from tkcalendar import DateEntry
 
 #方法转译
